@@ -1,0 +1,27 @@
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/terraform.tfvars
+*.tfvars
+!*.tfvars.example
+
+# SSH 키 (절대 커밋 금지)
+.ssh/
+*.pem
+*.key
+
+# 인증정보
+.db_credentials
+.redis_credentials
+.jenkins_credentials
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 에디터
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,47 @@
+# ══════════════════════════════════════════════════════
+# terraform.tfvars 예시 파일
+# 실제 사용 시 이 파일을 복사해서 terraform.tfvars 생성
+# ⚠️ terraform.tfvars는 .gitignore에 반드시 추가!
+# ══════════════════════════════════════════════════════
+
+# NCP 인증정보
+ncloud_access_key = "YOUR_ACCESS_KEY"
+ncloud_secret_key = "YOUR_SECRET_KEY"
+region            = "KR"
+
+# 프로젝트
+project_name = "hoseo-lms"
+environment  = "prod"
+
+# 네트워크
+vpc_cidr        = "10.0.0.0/16"
+subnet_lb_cidr  = "10.0.0.0/24"
+subnet_app_cidr = "10.0.1.0/24"
+subnet_dev_cidr = "10.0.2.0/24"
+subnet_db_cidr  = "10.0.3.0/24"
+
+# 서버 스펙 (NCP 서버 타입 코드)
+webwas_server_type = "m2-c8-m16"   # 8vCPU 16GB
+db_server_type     = "m2-c8-m32"   # 8vCPU 32GB
+cache_server_type  = "m2-c2-m8"    # 2vCPU 8GB
+dev_server_type    = "m2-c2-m4"    # 2vCPU 4GB
+server_image_name  = "rocky-8.6-64"
+
+# 디스크 크기 (GB)
+webwas_disk_size = 50
+db_disk_size     = 500
+cache_disk_size  = 50
+dev_disk_size    = 200
+nas_volume_size  = 500
+
+# SSH 키
+login_key_name = "hoseo-lms-key"
+
+# 도메인
+lms_domain = "learn.hoseo.ac.kr"
+cdn_domain = "cdn.hoseo.ac.kr"
+
+# 관리자 IP (SSL VPN 접속 허용 IP)
+admin_allowed_ips = [
+  # "x.x.x.x/32",  # 관리자 1 IP
+]
