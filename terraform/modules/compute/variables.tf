@@ -24,3 +24,9 @@ variable "ssh_port" {
   type        = string
   default     = "2222"  # 보안: 기본 포트 변경
 }
+
+variable "ssl_vpn_cidr" {
+  description = "NCP SSL VPN IP 대역 (관리자 접근용)"
+  type        = string
+  default     = "172.16.0.0/23"
+}

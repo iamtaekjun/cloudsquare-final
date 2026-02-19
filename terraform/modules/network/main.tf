@@ -33,16 +33,8 @@ resource "ncloud_subnet" "lb" {
   usage_type     = "LOADB"
 }
 
-# NAT Gateway Subnet (PUBLIC/GEN - required for NAT GW)
-resource "ncloud_subnet" "natgw" {
-  vpc_no         = ncloud_vpc.main.id
-  name           = "${var.project_name}-subnet-natgw"
-  subnet         = var.subnet_natgw_cidr
-  zone           = var.zone
-  network_acl_no = ncloud_vpc.main.default_network_acl_no
-  subnet_type    = "PUBLIC"
-  usage_type     = "GEN"
-}
+# NOTE: NAT Gateway 서브넷 (10.0.4.0/24)은 NCP 콘솔에서 수동 관리
+# NAT GW가 붙은 후 usage_type이 변경되어 Terraform으로 관리 불가
 
 # App Tier (Web/WAS + Cache) - Private
 resource "ncloud_subnet" "app" {

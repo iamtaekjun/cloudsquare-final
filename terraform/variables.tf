@@ -167,3 +167,9 @@ variable "admin_allowed_ips" {
   type        = list(string)
   default     = []  # 실제 운영 시 관리자 IP 입력
 }
+
+variable "ssl_vpn_cidr" {
+  description = "NCP SSL VPN IP 대역 (관리자 SSH 접근용)"
+  type        = string
+  default     = "172.16.0.0/23"
+}

@@ -16,9 +16,10 @@ timedatectl set-timezone Asia/Seoul
 
 # SSH security hardening
 SSH_PORT=2222
-sed -i "s/#Port 22/Port ${SSH_PORT}/" /etc/ssh/sshd_config
-sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
-sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i "s/^#*Port .*/Port ${SSH_PORT}/" /etc/ssh/sshd_config
+grep -q "^Port" /etc/ssh/sshd_config || echo "Port ${SSH_PORT}" >> /etc/ssh/sshd_config
+sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 systemctl restart sshd
 
 # Install MySQL 8.0

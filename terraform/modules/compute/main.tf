@@ -57,6 +57,12 @@ resource "ncloud_access_control_group_rule" "webwas" {
   }
   inbound {
     protocol    = "TCP"
+    ip_block    = var.ssl_vpn_cidr
+    port_range  = var.ssh_port
+    description = "SSL VPN 관리자 SSH"
+  }
+  inbound {
+    protocol    = "TCP"
     ip_block    = var.subnet_app_cidr
     port_range  = "6379"
     description = "Cache 서버 (Redis) 내부 통신"
@@ -104,6 +110,12 @@ resource "ncloud_access_control_group_rule" "cache" {
     port_range  = var.ssh_port
     description = "Dev 서버 SSH"
   }
+  inbound {
+    protocol    = "TCP"
+    ip_block    = var.ssl_vpn_cidr
+    port_range  = var.ssh_port
+    description = "SSL VPN 관리자 SSH"
+  }
 }
 
 # Dev ACG
@@ -121,6 +133,18 @@ resource "ncloud_access_control_group_rule" "dev" {
     ip_block    = var.vpc_cidr
     port_range  = var.ssh_port
     description = "VPC 내부 SSH"
+  }
+  inbound {
+    protocol    = "TCP"
+    ip_block    = var.ssl_vpn_cidr
+    port_range  = var.ssh_port
+    description = "SSL VPN 관리자 SSH"
+  }
+  inbound {
+    protocol    = "TCP"
+    ip_block    = var.ssl_vpn_cidr
+    port_range  = "8080"
+    description = "SSL VPN Jenkins Web UI"
   }
   inbound {
     protocol    = "TCP"
@@ -174,6 +198,12 @@ resource "ncloud_access_control_group_rule" "db" {
     ip_block    = var.subnet_dev_cidr
     port_range  = var.ssh_port
     description = "Dev 서버 SSH"
+  }
+  inbound {
+    protocol    = "TCP"
+    ip_block    = var.ssl_vpn_cidr
+    port_range  = var.ssh_port
+    description = "SSL VPN 관리자 SSH"
   }
 }
 

@@ -12,7 +12,6 @@ module "network" {
   project_name       = var.project_name
   vpc_cidr           = var.vpc_cidr
   subnet_lb_cidr     = var.subnet_lb_cidr
-  subnet_natgw_cidr  = var.subnet_natgw_cidr
   subnet_app_cidr    = var.subnet_app_cidr
   subnet_dev_cidr    = var.subnet_dev_cidr
   subnet_db_cidr     = var.subnet_db_cidr
@@ -44,6 +43,7 @@ module "compute" {
   db_disk_size       = var.db_disk_size
   cache_disk_size    = var.cache_disk_size
   dev_disk_size      = var.dev_disk_size
+  ssl_vpn_cidr       = var.ssl_vpn_cidr
 }
 
 # ──────────────────────────────────────────────
