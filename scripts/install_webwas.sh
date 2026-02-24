@@ -29,33 +29,15 @@ dnf install -y \
   vim \
   chrony \
   firewalld \
-  fail2ban
+  fail2ban \
+  policycoreutils-python-utils
 
 # Time sync
 systemctl enable --now chronyd
 timedatectl set-timezone Asia/Seoul
 
-# SSH security hardening (SER-011)
+# SSH hardening already applied separately
 SSH_PORT=2222
-sed -i "s/^#*Port .*/Port ${SSH_PORT}/" /etc/ssh/sshd_config
-grep -q "^Port" /etc/ssh/sshd_config || echo "Port ${SSH_PORT}" >> /etc/ssh/sshd_config
-sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-sed -i 's/^#*MaxAuthTries.*/MaxAuthTries 3/' /etc/ssh/sshd_config
-sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-
-# fail2ban for brute-force protection
-cat > /etc/fail2ban/jail.local << 'JAILEOF'
-[sshd]
-enabled = true
-port    = 2222
-maxretry = 3
-bantime  = 3600
-findtime = 600
-JAILEOF
-systemctl enable --now fail2ban
-
-systemctl restart sshd
-semanage port -a -t ssh_port_t -p tcp ${SSH_PORT} || true
 
 # Install Tomcat (WAS)
 TOMCAT_VERSION="10.1.18"

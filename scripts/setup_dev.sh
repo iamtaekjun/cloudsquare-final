@@ -13,13 +13,8 @@ dnf update -y
 dnf install -y epel-release
 timedatectl set-timezone Asia/Seoul
 
-# SSH security hardening (SER-011)
+# SSH hardening already applied separately
 SSH_PORT=2222
-sed -i "s/^#*Port .*/Port ${SSH_PORT}/" /etc/ssh/sshd_config
-grep -q "^Port" /etc/ssh/sshd_config || echo "Port ${SSH_PORT}" >> /etc/ssh/sshd_config
-sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-systemctl restart sshd
 
 # Install development tools
 dnf install -y \

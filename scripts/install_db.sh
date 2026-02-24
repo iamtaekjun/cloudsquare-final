@@ -14,13 +14,8 @@ echo "[$(date)] DB server initialization started"
 dnf update -y
 timedatectl set-timezone Asia/Seoul
 
-# SSH security hardening
+# SSH hardening already applied separately
 SSH_PORT=2222
-sed -i "s/^#*Port .*/Port ${SSH_PORT}/" /etc/ssh/sshd_config
-grep -q "^Port" /etc/ssh/sshd_config || echo "Port ${SSH_PORT}" >> /etc/ssh/sshd_config
-sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-systemctl restart sshd
 
 # Install MySQL 8.0
 dnf install -y https://dev.mysql.com/get/mysql80-community-release-el8-9.noarch.rpm
@@ -71,7 +66,7 @@ SQL
 cat > /etc/my.cnf.d/hoseo-lms.cnf << 'EOF'
 [mysqld]
 # Basic settings
-bind-address            = 10.0.3.1
+bind-address            = 0.0.0.0
 port                    = 3306
 default_storage_engine  = InnoDB
 character-set-server    = utf8mb4

@@ -226,9 +226,6 @@ resource "ncloud_server" "webwas" {
   # NOTE: access_control_group_configuration_no_list not supported in VPC
   # ACG must be attached manually via NCP console after server creation
 
-  # 초기화 스크립트
-  init_script_no = ncloud_init_script.webwas.id
-
   description = "호서대 LMS WEB/WAS 서버 ${count.index + 1}"
 }
 
@@ -251,7 +248,6 @@ resource "ncloud_server" "cache" {
   # NOTE: access_control_group_configuration_no_list not supported in VPC
   # ACG must be attached manually via NCP console after server creation
 
-  init_script_no = ncloud_init_script.cache.id
   description    = "Hoseo LMS Cache (Redis) server"
 }
 
@@ -270,7 +266,6 @@ resource "ncloud_server" "db" {
   # NOTE: access_control_group_configuration_no_list not supported in VPC
   # ACG must be attached manually via NCP console after server creation
 
-  init_script_no = ncloud_init_script.db.id
   description    = "Hoseo LMS DB server (MySQL)"
 }
 
@@ -289,36 +284,8 @@ resource "ncloud_server" "dev" {
   # NOTE: access_control_group_configuration_no_list not supported in VPC
   # ACG must be attached manually via NCP console after server creation
 
-  init_script_no = ncloud_init_script.dev.id
   description    = "Hoseo LMS Dev server"
 }
 
 # NOTE: ncloud_block_storage not supported for KVM Gen3 - attach via NCP console (200GB SSD)
 
-# ──────────────────────────────────────────────
-# 초기화 스크립트 (cloud-init)
-# ──────────────────────────────────────────────
-
-# WEB/WAS 초기화 스크립트
-resource "ncloud_init_script" "webwas" {
-  name    = "${var.project_name}-init-webwas"
-  content = file("${path.module}/../../../scripts/install_webwas.sh")
-}
-
-# Cache 초기화 스크립트
-resource "ncloud_init_script" "cache" {
-  name    = "${var.project_name}-init-cache"
-  content = file("${path.module}/../../../scripts/install_cache.sh")
-}
-
-# DB 초기화 스크립트
-resource "ncloud_init_script" "db" {
-  name    = "${var.project_name}-init-db"
-  content = file("${path.module}/../../../scripts/install_db.sh")
-}
-
-# Dev 초기화 스크립트
-resource "ncloud_init_script" "dev" {
-  name    = "${var.project_name}-init-dev"
-  content = file("${path.module}/../../../scripts/setup_dev.sh")
-}

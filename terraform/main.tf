@@ -84,7 +84,6 @@ module "security" {
   server_image_id       = module.compute.server_image_number
   webwas_server_type    = var.webwas_server_type
   login_key_name        = var.login_key_name
-  webwas_init_script_no = module.compute.webwas_init_script_no
   admin_allowed_ips     = var.admin_allowed_ips
 }
 
