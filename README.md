@@ -2,13 +2,15 @@
 
 나라장터 제안 요구사항(RFP)을 기반으로, Naver Cloud Platform(NCP) 위에 Coursemos LMS 클라우드 인프라를 **Terraform IaC**로 구성한 프로젝트입니다.
 
+> (주)클라우드스퀘어 현장실습(2026.01~02) 2차 과제입니다. 실제 공고(호서대학교 2026학년도 LMS 클라우드 유지보수 과업지시서)의 요구사항을 바탕으로 설계·구축·발표한 실습 결과물이며, 실제 수주·운영 사업이 아닙니다.
+
 | 항목 | 내용 |
 |------|------|
-| 대상 | 호서대학교 LMS (https://learn.hoseo.ac.kr) |
+| 과제 대상(RFP) | 호서대학교 LMS (https://learn.hoseo.ac.kr) |
 | 클라우드 | Naver Cloud Platform (NCP) |
 | IaC | Terraform `NaverCloudPlatform/ncloud ~> 3.2` |
 | OS | Rocky Linux 8 (Gen3 KVM) |
-| 기간 | 2026.3.1 ~ 2027.2.28 |
+| RFP 사업 기간 | 2026.3.1 ~ 2027.2.28 (실습 수행: 2026.01~02) |
 
 ---
 
